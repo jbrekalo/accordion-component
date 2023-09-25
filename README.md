@@ -1,6 +1,6 @@
 # The Ultimate React Course 2023: React, Redux & More
 
-## Solution to the coding challenge: Flashcards
+## Solution to the coding challenge: Accordion Component
 
 ### About the project
 
