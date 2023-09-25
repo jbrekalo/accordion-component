@@ -19,34 +19,36 @@ const faqs = [
 export default function App() {
   return (
     <div>
-      <Accordion />
+      <Accordion data={faqs} />
     </div>
   );
 }
 
-function Accordion() {
+function Accordion({ data }) {
   return (
     <div className="accordion">
-      {faqs.map((item) => (
-        <AccordionItem item={item} />
+      {data.map((item, i) => (
+        <AccordionItem title={item.title} text={item.text} number={i} key={i} />
       ))}
     </div>
   );
 }
 
-function AccordionItem({ item }) {
-  const [clicked, setClicked] = useState(false);
+function AccordionItem({ title, text, number }) {
+  const [open, setOpen] = useState(false);
 
-  function handleClicked(e) {
-    setClicked(!clicked);
+  function handleOpen() {
+    setOpen((open) => !open);
   }
 
   return (
-    <div className="item" onClick={(e) => handleClicked(e)}>
-      <span className="number">1</span>
-      <span className="title">{item.title}</span>
-      <span className="icon">+</span>
-      {clicked && <div className="content-box">{item.text}</div>}
+    <div className={`item ${open ? "open" : ""}`} onClick={() => handleOpen()}>
+      <span className="number">
+        {number < 9 ? `0${number + 1}` : number + 1}
+      </span>
+      <span className="title">{title}</span>
+      <span className="icon">{open ? "-" : "+"}</span>
+      {open && <div className="content-box">{text}</div>}
     </div>
   );
 }
